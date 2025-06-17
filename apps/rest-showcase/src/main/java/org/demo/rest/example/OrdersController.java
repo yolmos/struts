@@ -31,9 +31,6 @@ import org.apache.struts2.rest.HttpHeaders;
 
 import java.util.Collection;
 
-@Results({
-    @Result(name="success", type="redirectAction", params = {"actionName" , "orders"})
-})
 public class OrdersController extends ValidationAwareSupport implements ModelDriven<Object>, Validateable {
 
     private static final Logger log = LogManager.getLogger(OrdersController.class);

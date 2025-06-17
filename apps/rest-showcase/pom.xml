@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
@@ -19,68 +18,120 @@
  * under the License.
  */
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <asm.version>9.7.1</asm.version>
+        <jackson.version>2.18.0</jackson.version>
+        <log4j2.version>2.24.1</log4j2.version>
+        <ognl.version>3.3.5</ognl.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
+        <hibernate-validator.version>6.2.4.Final</hibernate-validator.version>
+    </properties>
+    <!--
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.build.outputTimestamp>2025-02-20T12:20:55Z</project.build.outputTimestamp>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <asm.version>9.7.1</asm.version>
+        <jackson.version>2.18.0</jackson.version>
+        <log4j2.version>2.24.1</log4j2.version>
+        <ognl.version>3.3.5</ognl.version>
+        <slf4j.version>2.0.16</slf4j.version>
+        <tiles.version>3.0.8</tiles.version>
+        <tiles-request.version>1.0.7</tiles-request.version>
+        <maven-surefire-plugin.version>3.5.1</maven-surefire-plugin.version>
+        <hibernate-validator.version>6.2.4.Final</hibernate-validator.version>
+        <freemarker.version>2.3.33</freemarker.version>
+
+        <fluido-skin.version>1.9</fluido-skin.version>
+        <argLine>-Duser.language=en -Duser.country=US -Duser.region=US</argLine>
+    </properties>    
+    -->
     <modelVersion>4.0.0</modelVersion>
+    <!--
     <parent>
         <groupId>org.apache.struts</groupId>
         <artifactId>struts2-apps</artifactId>
         <version>6.7.5-SNAPSHOT</version>
     </parent>
-
-    <artifactId>struts2-rest-showcase</artifactId>
+    -->
+    <groupId>com.citi.demo</groupId>
+    <artifactId>struts2-showcase</artifactId>
     <packaging>war</packaging>
-    <version>6.7.5-SNAPSHOT</version>
-    <name>Struts 2 Rest Showcase Webapp</name>
-    <description>Struts 2 Rest Showcase Example</description>
-
+    <version>6.7.0</version>
+    <name>Struts 2 Showcase Webapp</name>
+    <description>Struts 2 Showcase Example</description>
+    <!-- Dependencies-->
     <dependencies>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-rest-plugin</artifactId>
+            <version>6.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>6.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+            <version>6.7.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-convention-plugin</artifactId>
+            <version>6.7.0</version>
         </dependency>
+        <!--
         <dependency>
             <groupId>org.apache.struts</groupId>
             <artifactId>struts2-config-browser-plugin</artifactId>
         </dependency>
-
+        -->
+        <!-- Jackson dependency -->
         <dependency>
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-xml</artifactId>
+            <version>2.18.0</version>
         </dependency>
-
-        <!-- Logging -->
+        <!-- Log4j dependecy -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
+            <version>2.24.1</version>
         </dependency>
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
+            <version>2.24.1</version>
         </dependency>
-
+        <!-- Testing Dependencies -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <scope>test</scope>
+            <version>4.13.2</version>
+        <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>net.sourceforge.jwebunit</groupId>
             <artifactId>jwebunit-core</artifactId>
             <version>3.3</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>net.sourceforge.htmlunit</groupId>
             <artifactId>htmlunit</artifactId>
+            <version>2.70.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>net.sourceforge.jwebunit</groupId>
             <artifactId>jwebunit-htmlunit-plugin</artifactId>
@@ -91,19 +142,97 @@
                     <groupId>xom</groupId>
                     <artifactId>xom</artifactId>
                 </exclusion>
-                <!-- not necessary to compile and it force dependency convergence issues -->
                 <exclusion>
                     <groupId>net.sourceforge.htmlunit</groupId>
                     <artifactId>htmlunit</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-
     </dependencies>
-
+    <!-- Build -->
     <build>
-        <finalName>struts2-rest-showcase</finalName>
+        <finalName>struts2-showcase</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-project-info-reports-plugin</artifactId>
+                    <version>3.7.0</version>
+                </plugin>
+                <!-- Surefire plugin -->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven-surefire-plugin.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>org.apache.maven.surefire</groupId>
+                            <artifactId>surefire-junit47</artifactId>
+                            <version>${maven-surefire-plugin.version}</version>
+                        </dependency>
+                    </dependencies>
+                    <configuration>
+                        <argLine>@{argLine}</argLine>
+                        <includes>
+                            <include>**/*Test.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/TestBean.java</exclude>
+                        </excludes>
+                        <properties>
+                            <property>
+                                <name>junit</name>
+                                <value>false</value>
+                            </property>
+                        </properties>
+                    </configuration>
+                </plugin>
+                <!-- Apache Maven Plugin-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.4.0</version>
+                    <executions>
+                        <execution>
+                            <id>create-war</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>war</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
+            <!--Maven Compiler plugin-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-Xlint:deprecation</arg>
+                    </compilerArgs>
+                </configuration>                
+            </plugin>
+            <!--Maven Surefire Plugin-->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>@{argLine}</argLine>
+                    <excludes>
+                        <exclude>it/**</exclude>
+                        <exclude>**/*$*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>            
+            <!--Jetty Maven Simple Runtime Pluggin-->
             <plugin>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-maven-plugin</artifactId>
@@ -119,19 +248,6 @@
                     </webAppConfig>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <argLine>@{argLine}</argLine>
-                    <excludes>
-                        <exclude>it/**</exclude>
-                        <exclude>**/*$*</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-    <properties>
-    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
 </project>
